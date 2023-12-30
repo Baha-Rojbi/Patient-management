@@ -32,7 +32,7 @@
 <div class="container mt-4">
     <h2>Ajouter un Patient</h2>
 
-    <form th:action="@{/patients/add}" th:object="${patient}" method="post">
+    <form th:action="@{/patients/add}" th:object="${patient}" method="post" >
         <div class="row">
 
         <div class="input-group mb-3">
@@ -59,14 +59,15 @@
             </select>
         </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Date Naissance</span>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Date Naissance</span>
+                </div>
+                <input type="date" class="form-control" th:field="*{dateNaissance}" required />
             </div>
-            <input type="date" class="form-control" th:field="*{dateNaissance}" required />
-        </div>
 
-        <div class="input-group mb-3">
+
+            <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Adresse</span>
             </div>
@@ -85,6 +86,8 @@
             </div>
             <input type="text" class="form-control" th:field="*{maladie}" required />
         </div>
+
+
         </div>
 
         <!-- Add other properties as needed -->

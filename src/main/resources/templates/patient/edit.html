@@ -30,7 +30,7 @@
 <div class="container mt-4">
   <h2>Modifier un Patient</h2>
 
-  <form th:action="@{/patients/edit/{id}(id=${patient.idPatient})}" th:object="${patient}" method="post">
+  <form th:action="@{/patients/edit/{id}(id=${patient.idPatient})}" th:object="${patient}" method="post" >
     <div class="row">
 
       <div class="input-group mb-3">
@@ -83,6 +83,9 @@
         </div>
         <input type="text" class="form-control" th:field="*{maladie}" required />
       </div>
+
+
+
     </div>
 
     <!-- Add other properties as needed -->
