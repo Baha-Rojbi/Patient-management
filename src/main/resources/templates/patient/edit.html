@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier un Patient</title>
+</head>
+<style>
+  .container {
+    text-align: center;
+    max-width: 600px; /* Adjust the width as needed */
+    margin: auto;
+    border: 1px solid #ccc; /* Add a border */
+    padding: 20px;
+    border-radius: 10px; /* Add rounded corners */
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+</style>
+<body>
+
+<div class="container mt-4">
+  <h2>Modifier un Patient</h2>
+
+  <form th:action="@{/patients/edit/{id}(id=${patient.idPatient})}" th:object="${patient}" method="post">
+    <div class="row">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Nom</span>
+        </div>
+        <input type="text" class="form-control" th:field="*{nom}" required />
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Prenom</span>
+        </div>
+        <input type="text" class="form-control" th:field="*{prenom}" required />
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Genre</span>
+        </div>
+        <select class="form-control" th:field="*{genre}" required>
+          <option th:each="g : ${T(tn.patient.Entities.Patient$Genre).values()}"
+                  th:value="${g}" th:text="${#strings.capitalize(g.name())}"></option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Date Naissance</span>
+        </div>
+        <input type="date" class="form-control" th:field="*{dateNaissance}" required />
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Adresse</span>
+        </div>
+        <input type="text" class="form-control" th:field="*{addresse}" required />
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Numero de telephone</span>
+        </div>
+        <input type="text" class="form-control" th:field="*{numeroTelephone}" minlength="8" required />
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Maladie</span>
+        </div>
+        <input type="text" class="form-control" th:field="*{maladie}" required />
+      </div>
+    </div>
+
+    <!-- Add other properties as needed -->
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </form>
+
+  <a class="btn btn-secondary mt-2" href="/patients">Retour a la liste</a>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js if needed -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-q7eFUCuxpZhQPZOVfY+X1ncSAfDQI2XLxIptCB1jrDjI1rZ5K/b4F9eF4Z1tvz9Z"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy/9ADmNlji6Ll4TzRIB1pGtj5EJqN"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Add Bootstrap CSS -->
+  <meta charset="ISO-8859-1">
+  <title>Patient Management System</title>
+
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Patients</title>
+
+</head>
+<style>
+  .container {
+    text-align: center;
+    max-width: 1400px; /* Adjust the width as needed */
+    margin: auto;
+    border: 1px solid #ccc; /* Add a border */
+    padding: 20px;
+    border-radius: 10px; /* Add rounded corners */
+  }
+
+
+</style>
+<body>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Liste des Patients</h2>
+    </div>
+    <div class="col-md-6">
+      <form th:action="@{/patients/search}" method="get" class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="maladie" class="sr-only">Search by Maladie:</label>
+          <input type="text" class="form-control" id="maladie" name="maladie" placeholder="Enter maladie">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+      </form>
+    </div>
+  </div>
+
+
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Date Naissance</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Numero Telephone</th>
+      <th scope="col">Maladie</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient : ${patients}">
+      <td th:text="${patient.nom}"></td>
+      <td th:text="${patient.prenom}"></td>
+      <td>
+        <div th:style="'color: ' + (${patient.genre.toString() == 'Femme' ? 'red' : 'blue'})">
+          <span th:text="${patient.genre}"></span>
+        </div>
+      </td>
+      <td th:text="${patient.dateNaissance}"></td>
+      <td th:text="${patient.addresse}"></td>
+      <td th:text="${patient.numeroTelephone}"></td>
+      <td th:text="${patient.maladie}"></td>
+      <td>
+        <a class="btn btn-primary btn-sm mr-1" th:href="@{/patients/edit/{id}(id=${patient.idPatient})}">Edit</a>
+        <a class="btn btn-danger btn-sm" th:href="@{/patients/delete/{id}(id=${patient.idPatient})}">Delete</a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <a class="btn btn-success" href="/patients/add">Ajouter un Patient</a>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js if needed -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-q7eFUCuxpZhQPZOVfY+X1ncSAfDQI2XLxIptCB1jrDjI1rZ5K/b4F9eF4Z1tvz9Z"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy/9ADmNlji6Ll4TzRIB1pGtj5EJqN"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
